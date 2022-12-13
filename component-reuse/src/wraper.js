@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
+import Student from './components/student.component'
 
 export default class Wraper extends Component {
   render() {
     return (
-      <h1>wraper</h1>
+        <div className='container'>
+
+            <Student/>
+        </div>
     )
   }
 }
