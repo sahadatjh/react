@@ -10,7 +10,7 @@ export default class Wraper extends Component {
             <Navbar />
             <div className='container mt-3'>
                 <Movies />
-                <Student/>
+                {/* <Student/> */}
             </div>
         </React.Fragment>
     )

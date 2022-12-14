@@ -5,7 +5,7 @@ const TableBody = ({ columns, info: rows }) => {
                 rows.map( row => (
                     <tr>
                         {
-                            columns.map( column => column.content(row[column.path]) )
+                            columns.map( column => column.content(row, column.path) )
                         }
                     </tr>
                 ))
