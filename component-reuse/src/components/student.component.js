@@ -15,10 +15,10 @@ export default class Student extends Component {
 
   render() {
     const columns = [
-        {label:"Name", path:'name', content: item => <td>{item}</td>},
-        {label:"Roll", path:'roll', content: item => <td>{item}</td>},
-        {label:"Phone", path:'phone', content: item => <td>{item}</td>},
-        {label:"cgpa", path:'cgpa', content: item => <td>{item}</td>},
+        {label:"Name", path:'name', content: student => <td>{student.name}</td>},
+        {label:"Roll", path:'roll', content: student => <td>{student.roll}</td>},
+        {label:"Phone", path:'phone', content: student => <td>{student.phone}</td>},
+        {label:"cgpa", path:'cgpa', content: student => <td>{student.cgpa}</td>},
     ]
 
     return (
