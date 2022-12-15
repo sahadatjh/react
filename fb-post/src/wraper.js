@@ -5,7 +5,7 @@ import Post from './components/post.component';
 export default class Wraper extends Component {
   
   state={
-    postData:[
+    posts:[
         {
             id:1, 
             name:"Md Sahadat Hossen",
@@ -15,7 +15,7 @@ export default class Wraper extends Component {
             like:true
         },
         {
-            id:1, 
+            id:2, 
             name:"Afroza Khatun",
             date:"01 Jan 2023",
             txt:"এই যুবক আমাদের পিতাকে হত্যা করেছে। আমরা এর বিচার চাই। দোষী যুবককে টেনে-হিঁচড়ে খলীফার দরবারে নিয়ে এসেছেন দুই ব্যক্তি। তারা তাদের পিতার হত্যার বিচার চান। খলীফা হযরত উমর (রা) সেই যুবককে জিজ্ঞেস করলেন যে তার বিপক্ষে করা অভিযোগ সত্য  কিনা। অভিযোগ স্বীকার করল যুবক। দোষী যুবক সেই ঘটনার বর্ণনা দিলঃ",
@@ -25,14 +25,22 @@ export default class Wraper extends Component {
     ]
   }
 
+  handleToggleClick = (id) => {
+    // console.log(`click like btn => ${id}`);
+    const posts = [...this.state.posts];
+    const post = posts.find(post => post.id===id);
+    post.like=!post.like;
+    this.setState({posts});
+  }
+
   render() {
     return (
         <React.Fragment>
             <Navbar/>
             <div className='m-auto mt-3' style={{ maxWidth:'700px', }}>
             {
-                this.state.postData.map( (post, key) => (
-                    <Post key={key} info={post}/>
+                this.state.posts.map( (post, key) => (
+                    <Post key={key} info={post} handleToggleClick={this.handleToggleClick}/>
                 ) )
             }
             </div>

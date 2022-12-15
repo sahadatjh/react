@@ -5,7 +5,7 @@ import PostBody from './postbody.component';
 
 export default class Post extends Component {
   render() {
-    const { info } = this.props;
+    const { info, handleToggleClick } = this.props;
     return (
         <div className='card mb-3'>
             <div className='card-header'>
@@ -15,7 +15,7 @@ export default class Post extends Component {
                 <PostBody info={info}/>
             </div>
             <div className='card-footer'>
-                <Comment info={info}/>
+                <Comment info={info} handleToggleClick={handleToggleClick}/>
             </div>
         </div>
     )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Like from "./like.component";
 
-const Comment = () => {
+const Comment = ({ info, handleToggleClick }) => {
     return ( 
         <React.Fragment>
             <div className='row'>
@@ -9,7 +9,7 @@ const Comment = () => {
                     <input type="text" className="form-control" placeholder="Leave Your Comment....."/>
                 </div>
                 <div className='col-1'>
-                    <Like />
+                    <Like info={info} handleToggleClick={handleToggleClick}/>
                 </div>
             </div>
         </React.Fragment>
