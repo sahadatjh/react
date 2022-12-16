@@ -1,13 +1,15 @@
-const TableBody = () => {
+const TableBody = ({ movies: rows, columns }) => {
     return ( 
         <tbody>
-            <tr>
-                <td>Hello</td>
-                <td>Hello2</td>
-                <td>Hello3</td>
-                <td>Hello4</td>
-                <td>Hello5</td>
-            </tr>
+            {
+                rows.map( row => (
+                    <tr>
+                        {
+                            columns.map( column => column.content(row, column.path) )
+                        }
+                    </tr>
+                ) )
+            }
         </tbody>
      );
 }
