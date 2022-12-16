@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Table from './table.component';
 import getMovies from '../services/get-movies.service';
 
-export default class Wraper extends Component {
+export default class Movies extends Component {
 
   state={
     movies:[]
