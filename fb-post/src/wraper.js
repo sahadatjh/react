@@ -40,14 +40,25 @@ export default class Wraper extends Component {
     // console.log(`click like btn => ${id}`);
     const posts = [...this.state.posts];
     const post = posts.find(post => post.id===id);
-    post.dislike === false ? post.like=!post.like : alert('You are already dislike this!!!');
-    this.setState({posts});
+    if(post.dislike === true){
+      post.dislike = false;
+      post.like    = true;
+    }else{
+      post.like = !post.like;
+    }
+    this.setState({ posts });
   }
 
   handleDislike = (id) => {
     const posts = [...this.state.posts];
     const post = posts.find(post => post.id===id);
-    post.like===false ? post.dislike=!post.dislike : alert('You are already like this!');
+    if(post.like===true){
+      post.like = false;
+      post.dislike = true;
+    }else{
+      post.dislike = !post.dislike;
+    }
+    // post.like===false ? post.dislike=!post.dislike : alert('You are already like this!');
     this.setState({posts});
   }
 
