@@ -27,7 +27,7 @@ export default class Movies extends Component {
     return (
         <div className='container my-2'>
           <div className='table-responsive'>
-            <Table movies={this.state.movies} columns={columns}/>
+            <Table movies={this.state.movies} columns={columns} sortColumn={{ path:'id', order:'asc'}}/>
           </div>
         </div>
     )
