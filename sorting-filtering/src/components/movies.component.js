@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Table from './table.component';
 import getMovies from '../services/get-movies.service';
+import _ from 'lodash';
 
 export default class Movies extends Component {
 
@@ -18,7 +19,14 @@ export default class Movies extends Component {
     this.setState({...this.state, sortColumn})
   }
 
+  sortMovies = (movies) => {
+    const { sortColumn } = this.state;
+    const sortedMovies = _.orderBy(this.state.movies, [sortColumn.path],[sortColumn.order]);
+    return sortedMovies;
+  }
+
   render() {
+    const movies = this.sortMovies(this.state.movies);
 
     const columns = [
         { label:"ID", path:'id', content: ( movie, key ) => <td>{movie[key]}</td> },
@@ -32,7 +40,7 @@ export default class Movies extends Component {
     return (
         <div className='container my-2'>
           <div className='table-responsive'>
-            <Table movies={this.state.movies} columns={columns} onSort={this.handleSort} sortColumn={this.state.sortColumn}/>
+            <Table movies={movies} columns={columns} onSort={this.handleSort} sortColumn={this.state.sortColumn}/>
           </div>
         </div>
     )
