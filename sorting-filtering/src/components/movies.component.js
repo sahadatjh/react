@@ -5,12 +5,17 @@ import getMovies from '../services/get-movies.service';
 export default class Movies extends Component {
 
   state={
-    movies:[]
+    movies:[],
+    sortColumn:{path:'id',order:'asc'}
   }
 
   componentDidMount(){
     const movies = getMovies();
     this.setState({ movies });
+  }
+
+  handleSort = (sortColumn) => {
+    this.setState({...this.state, sortColumn})
   }
 
   render() {
@@ -27,7 +32,7 @@ export default class Movies extends Component {
     return (
         <div className='container my-2'>
           <div className='table-responsive'>
-            <Table movies={this.state.movies} columns={columns} sortColumn={{ path:'id', order:'asc'}}/>
+            <Table movies={this.state.movies} columns={columns} onSort={this.handleSort} sortColumn={this.state.sortColumn}/>
           </div>
         </div>
     )
