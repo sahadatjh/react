@@ -29,12 +29,12 @@ export default class Movies extends Component {
     const movies = this.sortMovies(this.state.movies);
 
     const columns = [
-        { label:"ID", path:'id', content: ( movie, key ) => <td>{movie[key]}</td> },
+        { label:"ID", path:'id', sorting: true, content: ( movie, key ) => <td>{movie[key]}</td> },
         { label:"Poster", path:'posterUrl', content: ( movie, key ) => <td><img src={movie[key]} style={{ height:'40px' }}/></td> },
-        { label:"Title", path:'title', content: ( movie, key ) => <td>{movie[key]}</td> },
-        { label:"Year", path:'year', content: ( movie, key ) => <td>{movie[key]}</td> },
-        { label:"Derectors", path:'director', content: ( movie, key ) => <td>{movie[key]}</td> },
-        { label:"Actores", path:'actors', content: ( movie, key ) => <td>{movie[key]}</td> }
+        { label:"Title", path:'title',sorting: true, content: ( movie, key ) => <td>{movie[key]}</td> },
+        { label:"Year", path:'year', sorting: true, content: ( movie, key ) => <td>{movie[key]}</td> },
+        { label:"Derectors", path:'director', sorting: true, content: ( movie, key ) => <td>{movie[key]}</td> },
+        { label:"Actores", path:'actors', sorting: true, content: ( movie, key ) => <td>{movie[key]}</td> }
     ]
 
     return (
