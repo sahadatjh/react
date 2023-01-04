@@ -9,7 +9,8 @@ export default class Movies extends Component {
   state={
     movies:[],
     sortColumn:{path:'id',order:'asc'},
-    activePage:1
+    pageCount:10,
+    activePage:2
   }
 
   componentDidMount(){
@@ -23,7 +24,7 @@ export default class Movies extends Component {
 
   sortMovies = (movies) => {
     const { sortColumn } = this.state;
-    const sortedMovies = _.orderBy(this.state.movies, [sortColumn.path],[sortColumn.order]);
+    const sortedMovies = _.orderBy(movies, [sortColumn.path],[sortColumn.order]);
     return sortedMovies;
   }
 
@@ -31,8 +32,17 @@ export default class Movies extends Component {
     this.setState({...this.state, activePage});
   }
 
+  paginateMovies = (movies) => {
+    const {activePage, pageCount}=this.state;
+    const start = (activePage-1)*pageCount;
+    const paginetedMovies = movies.slice(start, start+pageCount);
+    return paginetedMovies;
+  }
+ 
+
   render() {
-    const movies = this.sortMovies(this.state.movies);
+    const paginateMovies = this.paginateMovies(this.state.movies);
+    const movies = this.sortMovies(paginateMovies);
 
     const columns = [
         { label:"ID", path:'id', sorting: true, content: ( movie, key ) => <td>{movie[key]}</td> },
@@ -48,7 +58,7 @@ export default class Movies extends Component {
           <div className='table-responsive'>
             <Table movies={movies} columns={columns} onSort={this.handleSort} sortColumn={this.state.sortColumn}/>
           </div>
-          <Pagination totalItems={50} pageCount={5} activePage={this.state.activePage} ClickedPage={this.handlePageClick}/>
+          <Pagination totalItems={this.state.movies.length} pageCount={this.state.pageCount} activePage={this.state.activePage} ClickedPage={this.handlePageClick}/>
         </div>
     )
   }

@@ -17,9 +17,9 @@ const TableHeader = ({ columns, onSort, sortColumn }) => {
     const getIcon = (path) => {
         if (sortColumn.path ===path) {
             if (sortColumn.order ==='asc') {
-                return <i className="bi bi-sort-down"> </i>;
+                return <i className="bi bi-sort-up"> </i>;
             }else{
-                return <i className="bi bi-sort-up"></i>;
+                return <i className="bi bi-sort-down"></i>;
             }
         } else return null;
     }
