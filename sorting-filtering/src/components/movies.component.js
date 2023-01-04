@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Table from './table.component';
 import getMovies from '../services/get-movies.service';
 import _ from 'lodash';
+import Pagination from './pagination.component';
 
 export default class Movies extends Component {
 
@@ -42,6 +43,7 @@ export default class Movies extends Component {
           <div className='table-responsive'>
             <Table movies={movies} columns={columns} onSort={this.handleSort} sortColumn={this.state.sortColumn}/>
           </div>
+          <Pagination/>
         </div>
     )
   }
