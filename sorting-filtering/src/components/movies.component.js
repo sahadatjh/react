@@ -8,7 +8,8 @@ export default class Movies extends Component {
 
   state={
     movies:[],
-    sortColumn:{path:'id',order:'asc'}
+    sortColumn:{path:'id',order:'asc'},
+    activePage:1
   }
 
   componentDidMount(){
@@ -24,6 +25,10 @@ export default class Movies extends Component {
     const { sortColumn } = this.state;
     const sortedMovies = _.orderBy(this.state.movies, [sortColumn.path],[sortColumn.order]);
     return sortedMovies;
+  }
+
+  handlePageClick = (activePage) => {
+    this.setState({...this.state, activePage});
   }
 
   render() {
@@ -43,7 +48,7 @@ export default class Movies extends Component {
           <div className='table-responsive'>
             <Table movies={movies} columns={columns} onSort={this.handleSort} sortColumn={this.state.sortColumn}/>
           </div>
-          <Pagination/>
+          <Pagination totalItems={50} pageCount={5} activePage={this.state.activePage} ClickedPage={this.handlePageClick}/>
         </div>
     )
   }
