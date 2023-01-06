@@ -4,6 +4,7 @@ import Table from './table.component';
 import Pagination from './pagination.component';
 import getMovies from '../services/get-movies.service';
 import getGenres from '../services/get-genres.service';
+import Filter from './common/filtering.component';
 
 export default class Movies extends Component {
 
@@ -43,6 +44,9 @@ export default class Movies extends Component {
     return paginetedMovies;
   }
  
+  handleActiveGenere = (genere) => {
+    this.setState({ ...this.state, selectedGenres:genere })
+  }
 
   render() {
     const paginateMovies = this.paginateMovies(this.state.movies);
@@ -56,19 +60,13 @@ export default class Movies extends Component {
         { label:"Derectors", path:'director', sorting: true, content: ( movie, key ) => <td>{movie[key]}</td> },
         { label:"Actores", path:'actors', sorting: true, content: ( movie, key ) => <td>{movie[key]}</td> }
     ]
-
+    
     return (
         <div className='container my-2'>
           <div className='row'>
           <h1 className='text-center'>IMDB Top Movies</h1>
             <div className='col-md-2'>
-              <ul className="list-group">
-                {
-                  this.state.generes.map(genre => (
-                    <li className="list-group-item">{ genre }</li>
-                  ))
-                }
-              </ul>
+              <Filter items={this.state.generes} selectedItem={this.state.selectedGenres} clickedItem={this.handleActiveGenere} />
             </div>
             <div className='col-md-10'>
               <div className='table-responsive'>
