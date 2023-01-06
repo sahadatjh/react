@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Table from './table.component';
-import getMovies from '../services/get-movies.service';
 import _ from 'lodash';
+import Table from './table.component';
 import Pagination from './pagination.component';
+import getMovies from '../services/get-movies.service';
+import getGenres from '../services/get-genres.service';
 
 export default class Movies extends Component {
 
@@ -10,12 +11,15 @@ export default class Movies extends Component {
     movies:[],
     sortColumn:{path:'id',order:'asc'},
     pageCount:10,
-    activePage:2
+    activePage:2,
+    generes:[],
+    selectedGenres:"All Generes"
   }
 
   componentDidMount(){
     const movies = getMovies();
-    this.setState({ movies });
+    const generes = ["All Generes", ...getGenres()];
+    this.setState({...this.state, movies,generes });
   }
 
   handleSort = (sortColumn) => {
@@ -55,10 +59,24 @@ export default class Movies extends Component {
 
     return (
         <div className='container my-2'>
-          <div className='table-responsive'>
-            <Table movies={movies} columns={columns} onSort={this.handleSort} sortColumn={this.state.sortColumn}/>
+          <div className='row'>
+          <h1 className='text-center'>IMDB Top Movies</h1>
+            <div className='col-md-2'>
+              <ul className="list-group">
+                {
+                  this.state.generes.map(genre => (
+                    <li className="list-group-item">{ genre }</li>
+                  ))
+                }
+              </ul>
+            </div>
+            <div className='col-md-10'>
+              <div className='table-responsive'>
+                  <Table movies={movies} columns={columns} onSort={this.handleSort} sortColumn={this.state.sortColumn}/>
+              </div>
+              <Pagination totalItems={this.state.movies.length} pageCount={this.state.pageCount} activePage={this.state.activePage} ClickedPage={this.handlePageClick}/>
+            </div>
           </div>
-          <Pagination totalItems={this.state.movies.length} pageCount={this.state.pageCount} activePage={this.state.activePage} ClickedPage={this.handlePageClick}/>
         </div>
     )
   }
