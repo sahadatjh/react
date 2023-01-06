@@ -12,7 +12,7 @@ export default class Movies extends Component {
     movies:[],
     sortColumn:{path:'id',order:'asc'},
     pageCount:10,
-    activePage:2,
+    activePage:1,
     generes:[],
     selectedGenres:"All Generes"
   }
@@ -25,6 +25,18 @@ export default class Movies extends Component {
 
   handleSort = (sortColumn) => {
     this.setState({...this.state, sortColumn})
+  }
+
+  filterMovies = () => {
+    const { movies, selectedGenres } = this.state;
+    const filteredMovies = movies.filter(movie=>{
+      if(selectedGenres === "All Generes") return true;
+
+      if(movie.genres.includes(selectedGenres)) return true;
+
+      return false;
+    });
+    return filteredMovies; 
   }
 
   sortMovies = (movies) => {
@@ -49,7 +61,8 @@ export default class Movies extends Component {
   }
 
   render() {
-    const paginateMovies = this.paginateMovies(this.state.movies);
+    const filteredMoves = this.filterMovies();
+    const paginateMovies = this.paginateMovies(filteredMoves);
     const movies = this.sortMovies(paginateMovies);
 
     const columns = [
@@ -72,7 +85,7 @@ export default class Movies extends Component {
               <div className='table-responsive'>
                   <Table movies={movies} columns={columns} onSort={this.handleSort} sortColumn={this.state.sortColumn}/>
               </div>
-              <Pagination totalItems={this.state.movies.length} pageCount={this.state.pageCount} activePage={this.state.activePage} ClickedPage={this.handlePageClick}/>
+              <Pagination totalItems={filteredMoves.length} pageCount={this.state.pageCount} activePage={this.state.activePage} ClickedPage={this.handlePageClick}/>
             </div>
           </div>
         </div>
